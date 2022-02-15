@@ -4,13 +4,14 @@
 
 I created this plugin to make it easy to do two things:
 
-    1. yank and paste a formatted and syntax highlighted code block in a markdown document (eg vimwiki)
-    2. paste the formatted code block in an email / slack channel etc. (with links to the source code)
+1. yank and paste a formatted and syntax highlighted code block in a markdown document (eg vimwiki)
+2. paste the formatted code block in an email / slack channel etc. (with links to the source code)
 
 In addition to the yanked text adds:
 
-    1. a link to the source code wep repository
-    2. a relative file location / line number to the source code (to work with `gF`)
+1. a link to the source code web repository
+2. a relative file location / line number to the source code (to work with `gF`)
+
 ## Setup
 
 1. Install using your favorite vim package manager
