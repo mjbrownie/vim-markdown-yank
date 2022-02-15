@@ -80,6 +80,10 @@ int main(int argc, char **argv)
   but if you set up the default register to "+" then it will paste incorrectly.
 * weird filetypes might need to be changed manually in source.
 
+## TODO
+
+* [ ] Add bitbucket support
+* [ ] private repo / custom namespace support for (github/gitlab/bitbucket)
 
 ## Private Gitlab users
 
