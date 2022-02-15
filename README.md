@@ -41,9 +41,7 @@ It should paste (`p`) something like this...
 
 ```markdown
 
-`src/nvim/main.c:202 - 209`
-
-[git web](https://github.com/neovim/neovim/blob/master/src/nvim/main.c#L202-L209)
+`src/nvim/main.c:202 - 209` [web](https://github.com/neovim/neovim/blob/master/src/nvim/main.c#L202-L209)
 
 \`\`\`c
 #ifdef MAKE_LIB
@@ -60,9 +58,7 @@ int main(int argc, char **argv)
 
 or as formatted ...
 
-`src/nvim/main.c:202 - 209`
-
-[git web](https://github.com/neovim/neovim/blob/master/src/nvim/main.c#L202-L209)
+`src/nvim/main.c:202 - 209` [web](https://github.com/neovim/neovim/blob/master/src/nvim/main.c#L202-L209)
 
 ```c
 #ifdef MAKE_LIB

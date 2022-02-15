@@ -80,12 +80,12 @@ endfunction
 function! MarkdownCodeYank()
 
     let gllink = s:git_blob_link()
-    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "`\n\n". "[git web](" . gllink . ")\n\n" .  "```" . &ft . "\n". s:get_visual_selection() ."\n```"
+    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". "[web](" . gllink . ")\n\n" .  "```" . &ft . "\n". s:get_visual_selection() ."\n```"
 
     let @" = contents
     let gllink = s:git_blob_link(0)
 
-    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "`\n\n". "[git web](" . gllink . ")\n\n" .  "```" .  &ft . "\n". s:get_visual_selection() ."\n```"
+    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". "[web](" . gllink . ")\n\n" .  "```" .  &ft . "\n". s:get_visual_selection() ."\n```"
     let @+ = contents
 endfunction
 
