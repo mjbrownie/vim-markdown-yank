@@ -16,7 +16,7 @@ In addition to the yanked text adds:
 
 ## Screencast
 
-![Screencast](https://mjbrownie.github.io/screencasts/markdown_yank.webm.mov)
+<video src='https://mjbrownie.github.io/screencasts/markdown_yank.webm.mov' width=800/>
 
 
 ## Setup
