@@ -48,7 +48,9 @@ command! GitRemote echo s:git_remote()
 
 function s:get_file_and_line(remote, is_escaped = 1)
     "return current file and line number relative to pwd. adjust for gitlab
-    let escchar = a:is_escaped ? '\\' : ''
+    " let escchar = a:is_escaped ? "\\" : '' -- Dont have slack atm so not sure if this is needed.
+    let escchar = a:is_escaped ? "" : ''
+
     if a:remote == "github"
         return expand("%") . escchar . '#L' . line("'<") . "-L" . line("'>")
     else
