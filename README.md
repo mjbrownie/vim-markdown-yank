@@ -16,7 +16,7 @@ In addition to the yanked text adds:
 
 ## Screencast
 
-![Screencast](https://mjbrownie.github.io/screencasts/markdown_yank.webm)
+![Screencast](https://mjbrownie.github.io/screencasts/markdown_yank.webm.mov)
 
 
 ## Setup
