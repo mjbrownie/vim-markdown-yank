@@ -14,6 +14,11 @@ In addition to the yanked text adds:
 1. a link to the source code web repository
 2. a relative file location / line number to the source code (to work with `gF`)
 
+## Screencast
+
+![Screencast](https://mjbrownie.github.io/screencasts/markdown_yank.webm)
+
+
 ## Setup
 
 1. Install using your favorite vim package manager
