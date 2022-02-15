@@ -4,6 +4,8 @@
 
 I created this plugin to make it easy to do two things:
 
+If you are in the `pwd` of an open source github/gitlab project...
+
 1. yank and paste a formatted and syntax highlighted code block in a markdown document (eg vimwiki)
 2. paste the formatted code block in an email / slack channel etc. (with links to the source code)
 
