@@ -27,18 +27,21 @@ endfunction
 
 function! s:git_remote(...)
 
-    if exists('g:myank_git_provider_path') && exists('g:gitlab_prefix')
-        return ''
-    endif
+    " manual setting has been removed for now.
+    " if exists('g:myank_git_provider_path') && exists('g:gitlab_prefix')
+    "     return ''
+    " endif
 
     let remote =  s:chomped_system('git remote get-url origin')
     " if remote is a https url then return the https url
-    if match(remote, 'https:\/\/')
+    if match(remote, 'https:\/\/') != -1
+        echo "Matched"
         return remote
-
     "if remote is a ssh url then convert into https
-    elseif match(remote, 'git@')
-        let remote = substitute(remote, 'git@', 'https://', '')
+    elseif match(remote, '^git.') != -1
+        let remote = substitute(remote, '^git.', 'https://', '')
+        let remote = substitute(remote, '.org:', '.org/', '')
+        let remote = substitute(remote, '.com:', '.com/', '')
         let remote = substitute(remote, '\.git', '', '')
         return remote
     endif
@@ -53,8 +56,11 @@ function s:get_file_and_line(remote, is_escaped = 1)
 
     if a:remote == "github"
         return expand("%") . escchar . '#L' . line("'<") . "-L" . line("'>")
-    else
+    elseif a:remote == "gitlab"
         return expand("%") . escchar . '#L' . line("'<") . "-" . line("'>")
+    elseif a:remote == "bitbucket"
+        " #lines-15:19
+        return expand("%") . escchar . '#lines-' . line("'<") . ":" . line("'>")
     endif
 endfunction
 
@@ -75,6 +81,10 @@ function s:git_blob_link(is_escaped = 1)
         return remote . "/blob/" . s:git_commit_hash() . "/" . s:get_file_and_line("github", a:is_escaped)
     endif
 
+    if match(remote, 'bitbucket.org') > -1
+        return remote . "/src/" . s:git_commit_hash() . "/" . s:get_file_and_line("bitbucket", a:is_escaped)
+    endif
+
 endfunction
 
 function! MarkdownCodeYank()
@@ -82,11 +92,12 @@ function! MarkdownCodeYank()
     let gllink = s:git_blob_link()
     let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". "[web](" . gllink . ")\n\n" .  "```" . &ft . "\n". s:get_visual_selection() ."\n```"
 
-    let @" = contents
+    call setreg('"', contents, 'l')
     let gllink = s:git_blob_link(0)
 
     let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". "[web](" . gllink . ")\n\n" .  "```" .  &ft . "\n". s:get_visual_selection() ."\n```"
-    let @+ = contents
+    call setreg('+', contents, 'l')
+
 endfunction
 
 " vnoremap \my :call MarkdownCodeYank()<cr>

@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 
 ## TODO
 
-* [ ] Add bitbucket support
+* [X] Add bitbucket support
 * [ ] private repo / custom namespace support for (github/gitlab/bitbucket)
 
 ## Private Gitlab users
