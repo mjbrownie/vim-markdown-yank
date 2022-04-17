@@ -90,12 +90,25 @@ endfunction
 function! MarkdownCodeYank()
 
     let gllink = s:git_blob_link()
-    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". "[web](" . gllink . ")\n\n" .  "```" . &ft . "\n". s:get_visual_selection() ."\n```"
+
+    if gllink == 0 
+        let link = "[web](" . gllink . ")"
+    else
+        let link = ""
+    endif
+
+    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". link . "\n\n" .  "~~~{.numberlines .lineAnchors startFrom=" . line("'<") . "}" .  &ft . "\n". s:get_visual_selection() ."\n~~~"
 
     call setreg('"', contents, 'l')
     let gllink = s:git_blob_link(0)
 
-    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". "[web](" . gllink . ")\n\n" .  "```" .  &ft . "\n". s:get_visual_selection() ."\n```"
+    if gllink == 0 
+        let link = "[web](" . gllink . ")"
+    else
+        let link = ""
+    endif
+
+    let contents = "`" . expand("%") . ":" . line("'<") . " - " . line("'>") . "` ". link . "\n\n" .  "~~~{.numberlines .lineAnchors startFrom=" . line("'<") . "}" .  &ft . "\n". s:get_visual_selection() ."\n~~~"
     call setreg('+', contents, 'l')
 
 endfunction
