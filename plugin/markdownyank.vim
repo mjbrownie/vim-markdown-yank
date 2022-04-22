@@ -33,9 +33,11 @@ function! s:git_remote(...)
     " endif
 
     let remote =  s:chomped_system('git remote get-url origin')
-    " if remote is a https url then return the https url
+
+    " remove any https://user@ references
+    let remote = substitute(remote, '^https://[^@]\+@', 'https://', '')
+
     if match(remote, 'https:\/\/') != -1
-        echo "Matched"
         return remote
     "if remote is a ssh url then convert into https
     elseif match(remote, '^git.') != -1
@@ -64,9 +66,14 @@ function s:get_file_and_line(remote, is_escaped = 1)
     endif
 endfunction
 
-"return current git COMMIT_HASH
-function! s:git_commit_hash()
+"return current git COMMIT branch
+function! s:git_commit_branch()
     return s:chomped_system("git symbolic-ref --short HEAD")
+endfunction
+
+"return current git COMMIT hash
+function! s:git_commit_hash()
+    return s:chomped_system("git rev-parse HEAD")
 endfunction
 
 "find the git archives blob url prefix
@@ -74,11 +81,11 @@ function s:git_blob_link(is_escaped = 1)
     let remote = s:git_remote()
     "if gitlab.com then return with "~/blob/COMMIT_HASH/path/to/file"
     if match(remote, 'gitlab.com') > -1
-        return remote . "/~/blob/" . s:git_commit_hash() . "/" . s:get_file_and_line("gitlab", a:is_escaped)
+        return remote . "/~/blob/" . s:git_commit_branch() . "/" . s:get_file_and_line("gitlab", a:is_escaped)
     endif
     " if github.com then return with "/blob/COMMIT_HASH/path/to/file"
     if match(remote, 'github.com') > -1
-        return remote . "/blob/" . s:git_commit_hash() . "/" . s:get_file_and_line("github", a:is_escaped)
+        return remote . "/blob/" . s:git_commit_branch() . "/" . s:get_file_and_line("github", a:is_escaped)
     endif
 
     if match(remote, 'bitbucket.org') > -1
